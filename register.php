@@ -61,6 +61,6 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name
         <label>名前: <input type="text" name="name"/></label><br/>
         <input type="submit" value="新規登録">
       </form>
-      </div>
+    </div>
   </body>
 </html>
