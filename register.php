@@ -10,13 +10,32 @@ try {
 } catch (Exception $e){
   $message="接続に失敗しました:{$e->getMessage()}";
 }
+//入力が入ってたらユーザーを作成
+if(!empty($_POST['name']) && !empty($_POST['email']) &&!empty($_POST['password'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $sql = 'INSERT INTO `users` (name, email, password, createdAt, updatedAt)';
+  $sql .= ' VALUES (:name, :email, :password, NOW(), NOW())';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':name', $name, \PDO::PARAM_STR);
+  $stmt->bindValue(':email', $email, \PDO::PARAM_STR);
+  $stmt->bindValue(':password', $password, \PDO::PARAM_STR);
+  $result = $stmt->execute();
+  if($result){
+    $message = 'ユーザーを作成しました';
+  } else {
+    $message = '登録に失敗しました';
+  }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>新規作成</title>
+  <meta charset="UTF-8">
+  <title>新規作成</title>
 </head>
 <body>
   <header>
@@ -29,11 +48,14 @@ try {
     <h1>新規作成</h1>
   </header>
   <div>
+    <div style="color: red">
+      <?php echo $message; ?>
+    </div>
     <form action="/vantan_board/register.php" method="post">
-	<label>アカウント名: <input type="text" name="name"></label><br>
-	<label>メールアドレス: <input type="email" name="email"/></label><br>
-        <label>パスワード: <input type="password" name="password"/></label><br>
-        <input type="submit" value="新規登録">
+    	<label>アカウント名: <input type="text" name="name"></label><br>
+    	<label>メールアドレス: <input type="email" name="email"/></label><br>
+      <label>パスワード: <input type="password" name="password"/></label><br>
+      <input type="submit" value="新規登録">
     </form>
   </div>
 </body>
