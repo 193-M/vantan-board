@@ -1,4 +1,6 @@
 <?php
+session_start(); 
+
 $message = '';
 try {
     $DBSERVER = 'localhost';
@@ -29,6 +31,10 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name
     $result = $stmt->execute();
     if($result) {
         $message = 'ユーザーを作成しました';
+        $_SESSION['id'] = $pdo->lastInsertId();
+        $_SESSION['name'] = $name;
+        $_SESSION['mail'] = $mail;
+        $_SESSION['password'] = $password;
     } else {
         $message = '登録に失敗しました';
     }
