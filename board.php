@@ -24,7 +24,7 @@ $stmt->execute();
 $board = $stmt->fetch();
 
 if (empty($board)) {
-    header('Location: /vantan_board/index.php');
+    header('Location: /vantan-board/index.php');
     exit;
 }
 
@@ -41,7 +41,7 @@ if (!empty($_POST['message'])) {
     if ($result) {
         // コメントしました
     } else {
-        $message = '登録に失敗しました';
+        $message = 'コメントできませんでした';
     }
 }
 
@@ -74,7 +74,7 @@ $comments = $stmt->fetchAll();
       <ul>
         <?php
         foreach ($comments as $comment) {
-            echo "<li>{$comment['comment']}</li>";
+            echo "<li>{$comment['comment']} ($comment['createdAt'])</li>";
         }
         ?>
       </ul>
