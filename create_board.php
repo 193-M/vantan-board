@@ -33,6 +33,8 @@ if (!empty($_POST['title'])) {
     $result = $stmt->execute();
     if($result) {
         $message = '掲示板を作成しました';
+        header('Location: /vantan-board/board.php?id=' $pdo->lastInsertId());
+    exit;
     } else {
         $message = '作成に失敗しました';
     }
@@ -52,6 +54,7 @@ if (!empty($_POST['title'])) {
         <a href="/vantan-board/register.php">新規登録</a>
         <a href="/vantan-board/login.php">ログイン</a>
         <a href="/vantan-board/logout.php">ログアウト</a>
+        <a href="/vantan-board/create_board.php">掲示板新規作成</a>
       </div>
       <h1>掲示板の新規作成</h1>
     </header>
