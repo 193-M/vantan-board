@@ -1,7 +1,7 @@
 <?php
-session_start(); 
+session_start();
 
-if (!empty($_SESSION['id'])){
+if (!empty($_SESSION['id'])) {
     header('Location: /vantan-board/index.php');
     exit;
 }
@@ -21,7 +21,6 @@ try {
 } catch (Exception $e) {
     $message = "接続に失敗しました: {$e->getMessage()}";
 }
-
 if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -30,21 +29,21 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
-    $user=$stmt->$fetch();
-    if(!empty($user['id'] && $user['password']===$password)){
+    $user = $stmt->fetch();
+    if (!empty($user['id']) && $user['password'] === $password) {
         $_SESSION['id'] = $user['id'];
-        $_SESSION['name'] = $user['name'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['password'] = $user['password'];
+        $_SESSION['name'] = $user['name'];
         header('Location: /vantan-board/index.php');
         exit;
     } else {
-        $message = "ログインに失敗しました";
+        $message = 'ログインに失敗しました';
     }
-    
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
