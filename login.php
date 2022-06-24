@@ -1,6 +1,11 @@
 <?php
 session_start(); 
 
+if (!empty($_SESSION['id'])){
+    header('Location: /vantan-board/index.php');
+    exit;
+}
+
 $message = '';
 try {
     $DBSERVER = 'localhost';
