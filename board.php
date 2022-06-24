@@ -74,7 +74,12 @@ $comments = $stmt->fetchAll();
       <ul>
         <?php
         foreach ($comments as $comment) {
-            echo "<li>{$comment['comment']} ({$comment['createdAt']})</li>";
+            $sql = 'SELECT * FROM `users` WHERE id = :userId';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $comment['userId'], PDO::PARAM_INT);
+            $stmt->execute();
+            $creater = $stmt->fetch();
+            echo "<li>{$comment['comment']} ({$comment['createdAt']}) 投稿者:{$creater['name']}</li>";
         }
         ?>
       </ul>
