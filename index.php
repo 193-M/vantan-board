@@ -46,7 +46,7 @@
       <ul>
         <?php
           foreach($boardList as $board) {
-            $sql = 'SELECT * FROM `users` WHERE id = {$board['userId']}';
+            $sql = 'SELECT * FROM `users` WHERE id = :$board['userId']';
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             $creater = $stmt->fetch();
