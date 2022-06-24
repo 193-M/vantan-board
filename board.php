@@ -74,7 +74,7 @@ $comments = $stmt->fetchAll();
       <ul>
         <?php
         foreach ($comments as $comment) {
-            echo "<li>{$comment['comment']} ($comment['createdAt'])</li>";
+            echo "<li>{$comment['comment']} ({$comment['createdAt']})</li>";
         }
         ?>
       </ul>
