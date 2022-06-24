@@ -59,7 +59,7 @@ if (!empty($_POST['title'])) {
       <div style="color: red">
         <?php echo $message; ?>
       </div>
-      <form action="/vantan-board/board_create.php" method="post">
+      <form action="/vantan-board/create_board.php" method="post">
         <label>タイトル: <input type="text" name="title"/></label><br/>
         <input type="submit" value="新規作成">
       </form>
