@@ -63,7 +63,7 @@ $comments = $stmt->fetchAll();
     <header>
       <div>
         <a href="/vantan-board/index.php">TOP</a>
-        <a href="/vantan-board/register.php">新規作成</a>
+        <a href="/vantan-board/register.php">新規登録</a>
         <a href="/vantan-board/login.php">ログイン</a>
         <a href="/vantan-board/logout.php">ログアウト</a>
         <a href="/vantan-board/create_board.php">掲示板作成</a>
@@ -74,9 +74,9 @@ $comments = $stmt->fetchAll();
       <ul>
         <?php
         foreach ($comments as $comment) {
-            $sql = 'SELECT * FROM `users` WHERE id = :userId';
+            $sql = 'SELECT * FROM `users` WHERE id = :id';
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':userId', $comment['userId'], PDO::PARAM_INT);
+            $stmt->bindValue(':id', $comment['userId'], PDO::PARAM_INT);
             $stmt->execute();
             $creater = $stmt->fetch();
             echo "<li>{$comment['comment']} ({$comment['createdAt']}) 投稿者:{$creater['name']}</li>";
