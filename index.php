@@ -11,7 +11,7 @@
     <header>
       <div>
         <a href="/vantan-board/index.php">TOP</a>
-        <a href="/vantan-board/register.php">新規作成</a>
+        <a href="/vantan-board/register.php">新規登録</a>
         <a href="/vantan-board/login.php">ログイン</a>
         <a href="/vantan-board/logout.php">ログアウト</a>
       </div>

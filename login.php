@@ -1,5 +1,10 @@
 <?php
-session_start(); 
+session_start();
+
+if (!empty($_SESSION['id'])) {
+    header('Location: /vantan-board/index.php');
+    exit;
+}
 
 $message = '';
 try {
@@ -16,36 +21,35 @@ try {
 } catch (Exception $e) {
     $message = "接続に失敗しました: {$e->getMessage()}";
 }
-
-if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'])) {
+if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $name = $_POST['name'];
 
-    $sql = 'INSERT INTO `users` (name, email, password, createdAt, updatedAt)';
-    $sql .= ' VALUES (:name, :email, :password, NOW(), NOW())';
+    $sql = 'SELECT * FROM `users` WHERE email = :email';
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':password', $password, PDO::PARAM_STR);
-    $result = $stmt->execute();
-    if($result) {
-        $message = 'ユーザーを作成しました';
-        $_SESSION['id'] = $pdo->lastInsertId();
-        $_SESSION['name'] = $name;
-        $_SESSION['mail'] = $mail;
-        $_SESSION['password'] = $password;
+    $stmt->execute();
+    $user = $stmt->fetch();
+    if (!empty($user['id']) && $user['password'] === $password) {
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['password'] = $user['password'];
+        $_SESSION['name'] = $user['name'];
+        header('Location: /vantan-board/index.php');
+        exit;
     } else {
-        $message = '登録に失敗しました';
+        $message = 'ログインに失敗しました';
     }
 }
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>新規登録</title>
+    <title>ログイン</title>
   </head>
   <body>
     <header>
@@ -55,17 +59,16 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name
         <a href="/vantan-board/login.php">ログイン</a>
         <a href="/vantan-board/logout.php">ログアウト</a>
       </div>
-      <h1>新規作成</h1>
+      <h1>ログイン</h1>
     </header>
     <div>
       <div style="color: red">
         <?php echo $message; ?>
       </div>
-      <form action="/vantan-board/register.php" method="post">
+      <form action="/vantan-board/login.php" method="post">
         <label>メールアドレス: <input type="email" name="email"/></label><br/>
         <label>パスワード: <input type="password" name="password"/></label><br/>
-        <label>名前: <input type="text" name="name"/></label><br/>
-        <input type="submit" value="新規登録">
+        <input type="submit" value="ログイン">
       </form>
     </div>
   </body>
