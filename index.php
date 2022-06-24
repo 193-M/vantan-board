@@ -49,7 +49,7 @@
             $sql = 'SELECT * FROM `users` WHERE id = :$board['userId']';
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-            $creater = $stmt->fetch();
+            $creater = $stmt->fetchall();
             echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']}) (作成者:{$creater['name']})</a></li>";
           }
         ?>
