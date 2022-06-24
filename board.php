@@ -1,12 +1,6 @@
 <?php
   session_start();
 
-  if(empty($_GET['id'])){
-    header('Location: /vantan-board/index.php');
-    exit;
-  }
-  $id = $_GET['id'];
-
   $message = '';
   try {
     $DBSERVER = 'localhost';
@@ -22,17 +16,18 @@
   } catch (Exception $e) {
     $message = "接続に失敗しました: {$e->getMessage()}";
   }
+  $id = $_GET['id'];
 
-    $sql = 'SELECT * FROM `boards` WHERE id = :id';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
-    $stmt->execute();
-    $board = $stmt->fetch();
-
-    if(empty($board)){
-        header('Location: /vantan-board/index.php');
-        exit;
-    } 
+  $sql = 'SELECT * FROM `boards` WHERE id = :id';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+  $stmt->execute();
+  $board = $stmt->fetch();
+  
+  if(empty($board)){
+    header('Location: /vantan-board/index.php');
+    exit;
+  } 
 
     if(!empty($_POST['comment']) && !empty($_SESSION['id'])) {
         $sql = 'INSERT INTO `comments` (boardId, userId, comment, created)';
@@ -47,6 +42,12 @@
         } else {
             $message = 'コメントに失敗しました';
         }
+    $sql = 'SELECT * FROM `comments` WHERE boardId = :boardId ORDER BY createdAt';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':boardId', $id, PDO::PARAM_STR);
+    $stmt->execute();
+    $comments = $stmt->fetchAll();
+        
     }
    
 
@@ -61,11 +62,11 @@
   <body>
     <header>
       <div>
-        <a href="/board/index.php">TOP</a>
-        <a href="/board/create_board.php">掲示板作成</a>
-        <a href="/board/register.php">新規作成</a>
-        <a href="/board/login.php">ログイン</a>
-        <a href="/board/logout.php">ログアウト</a>
+        <a href="/vantan-board/index.php">TOP</a>
+        <a href="/vantan-board/create_board.php">掲示板作成</a>
+        <a href="/vantan-board/register.php">新規登録</a>
+        <a href="/vantan-board/login.php">ログイン</a>
+        <a href="/vantan-board/logout.php">ログアウト</a>
       </div>
       <h1><?php echo $board['title']; ?></h1>
     </header>
@@ -77,13 +78,13 @@
         コメント一覧
         <ul>
           <?php
-            foreach ($commentList as $comment) {
+            foreach ($comments as $comment) {
               echo "<li>{$comment['comment']}</li>";
             }
           ?>
         </ul>
       </div>
-      <form action="board.php?id=<?php echo $id; ?>" method="post">
+      <form action="/vantan-board/board.php?id=<?php echo $id; ?>" method="post">
         <label>コメント: <input type="text" name="comment"/></label><br/>
         <input type="submit" value="コメント">
       </form>
