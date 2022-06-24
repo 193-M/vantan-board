@@ -62,11 +62,11 @@ $comments = $stmt->fetchAll();
   <body>
     <header>
       <div>
-        <a href="/vantan_board/index.php">TOP</a>
-        <a href="/vantan_board/register.php">新規作成</a>
-        <a href="/vantan_board/login.php">ログイン</a>
-        <a href="/vantan_board/logout.php">ログアウト</a>
-        <a href="/vantan_board/create_board.php">掲示板作成</a>
+        <a href="/vantan-board/index.php">TOP</a>
+        <a href="/vantan-board/register.php">新規作成</a>
+        <a href="/vantan-board/login.php">ログイン</a>
+        <a href="/vantan-board/logout.php">ログアウト</a>
+        <a href="/vantan-board/create_board.php">掲示板作成</a>
       </div>
       <h1><?php echo $board['title']; ?></h1>
     </header>
@@ -80,12 +80,12 @@ $comments = $stmt->fetchAll();
       </ul>
     </div>
     <?php if (!empty($_SESSION['id'])) { ?>
-    <div>
-      <form action="/vantan_board/board.php?id=<?php echo $id; ?>" method="post">
-        <label>コメント: <input type="text" name="message"/></label><br/>
-        <input type="submit" value="コメントする">
-      </form>
-    </div>
+      <div>
+        <form action="/vantan_board/board.php?id=<?php echo $id; ?>" method="post">
+          <label>コメント: <input type="text" name="message"/></label><br/>
+          <input type="submit" value="コメントする">
+        </form>
+      </div>
     <?php } ?>
   </body>
 </html>
