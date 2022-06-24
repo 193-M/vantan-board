@@ -45,7 +45,7 @@ if (!empty($_POST['title'])) {
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>新規作成</title>
+    <title>掲示板作成</title>
   </head>
   <body>
     <header>
@@ -54,9 +54,9 @@ if (!empty($_POST['title'])) {
         <a href="/vantan-board/register.php">新規登録</a>
         <a href="/vantan-board/login.php">ログイン</a>
         <a href="/vantan-board/logout.php">ログアウト</a>
-        <a href="/vantan-board/create_board.php">掲示板新規作成</a>
+        <a href="/vantan-board/create_board.php">掲示板作成</a>
       </div>
-      <h1>掲示板の新規作成</h1>
+      <h1>掲示板新規作成</h1>
     </header>
     <div>
       <div style="color: red">
