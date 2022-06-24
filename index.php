@@ -46,10 +46,7 @@
       <ul>
         <?php
           foreach($boardList as $board) {
-            $sql = 'SELECT * FROM `users` WHERE id = {$board['userId']}';
-            $stmt = $pdo->prepare($sql);
-            $creater = $stmt->execute();
-            echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']}) (作成者:{$creater['name']})</a></li>";
+            echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']}) </a></li>";
           }
         ?>
       </ul>
