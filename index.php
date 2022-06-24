@@ -46,7 +46,7 @@
       <ul>
         <?php
           foreach($boardList as $board) {
-            $sql = 'SELECT name FROM users WHERE id = $board['userId']';
+            $sql = 'SELECT name FROM users WHERE id = {$board['userId']}';
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             $user = $stmt->fetch();
