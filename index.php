@@ -46,7 +46,7 @@
       <ul>
         <?php
           foreach($boardList as $board) {
-            echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']})</a></li>";
+            echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']}) (作成者:{$board['name']})</a></li>";
           }
         ?>
       </ul>
