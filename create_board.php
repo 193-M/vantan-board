@@ -33,8 +33,8 @@ if (!empty($_POST['title'])) {
     $result = $stmt->execute();
     if($result) {
         $message = '掲示板を作成しました';
-        header('Location: /vantan-board/board.php?id=' $pdo->lastInsertId());
-    exit;
+        header('Location: /vantan-board/board.php?id=' .$pdo->lastInsertId());
+        exit;
     } else {
         $message = '作成に失敗しました';
     }
