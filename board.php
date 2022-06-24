@@ -86,5 +86,6 @@ $comments = $stmt->fetchAll();
         <input type="submit" value="コメントする">
       </form>
     </div>
+    <?php } ?>
   </body>
 </html>
