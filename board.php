@@ -81,7 +81,7 @@ $comments = $stmt->fetchAll();
     </div>
     <?php if (!empty($_SESSION['id'])) { ?>
       <div>
-        <form action="/vantan_board/board.php?id=<?php echo $id; ?>" method="post">
+        <form action="/vantan-board/board.php?id=<?php echo $id; ?>" method="post">
           <label>コメント: <input type="text" name="message"/></label><br/>
           <input type="submit" value="コメントする">
         </form>
