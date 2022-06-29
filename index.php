@@ -46,7 +46,12 @@
       <ul>
         <?php
           foreach($boardList as $board) {
-            echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']}) </a></li>";
+            $sql = 'SELECT * FROM `users` WHERE id = :id';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $board['userId'], PDO::PARAM_INT);
+            $stmt->execute();
+            $createdBy = $stmt->fetch();
+            echo "<li><a href='/vantan-board/board.php?id={$board['id']}'>{$board['title']} ({$board['createdAt']}) 投稿者:{$createdBy['name']}</a></li>";
           }
         ?>
       </ul>
