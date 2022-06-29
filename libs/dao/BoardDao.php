@@ -13,11 +13,10 @@
       */
      public function insert($title)
      {
-         $sql = 'INSERT INTO `boards` (title, userId, createdAt)';
-         $sql .= ' VALUES (:title, :userId, NOW())';
+         $sql = 'INSERT INTO `boards` (title, createdAt)';
+         $sql .= ' VALUES (:title,  NOW())';
          $stmt = $this->pdo->prepare($sql);
          $stmt->bindValue(':title', $title, \PDO::PARAM_STR);
-         $stmt->bindValue(':userId', $_SESSION['id'], PDO::PARAM_INT);
          $result = $stmt->execute();
          if ($result) {
              return $this->pdo->lastInsertId();
