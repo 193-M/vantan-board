@@ -12,7 +12,7 @@
             <h2>掲示板一覧</h2>
             <ul>
                 {foreach from=$boardList item=board}
-                <li><a href='/vantan-board/board.php?id={$board->id}'>{$board->title}（{$board->created}）</a></li>
+                <li><a href='/vantan-board/board.php?id={$board->id}'>{$board->title}（{$board->createdAt}）</a></li>
                 {/foreach}
             </ul>
         </div>
