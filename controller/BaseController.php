@@ -36,7 +36,7 @@
              session_start();
              $email = empty($_SESSION['email']) ? '' : $_SESSION['email'];
              //$password = empty($_SESSION['password']) ? '' : $_SESSION['password'];
-             $this->user = $this->userDao->findByEMail($email);
+             $this->user = $this->userDao->findByEmail($email);
              // ログイン必須でログインしていなかったらログインページに遷移する
              if ($this->isLogin && empty($this->user)) {
                  header('Location: ./login.php');
