@@ -30,7 +30,7 @@
       * @return array
       */
       public function findAll() {
-        $sql = 'SELECT * FROM `boards` ORDER BY createdAt';
+        $sql = 'SELECT * FROM `boards` ORDER BY id DESC';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $boardList = [];
