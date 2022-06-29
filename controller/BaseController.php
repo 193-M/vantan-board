@@ -39,7 +39,7 @@
              $this->user = $this->userDao->findByEmail($email);
              // ログイン必須でログインしていなかったらログインページに遷移する
              if ($this->isLogin && empty($this->user)) {
-                 header('Location: ./login.php');
+                 header('Location: ./vantan-board/login.php');
                  exit();
              }
              $this->smarty->assign('user', $this->user);
