@@ -62,45 +62,4 @@
      protected function afterMain()
      {
      }
- }
- public function execute()
- {
-     try {
-         $this->beforeMain();
-         // ログイン処理
-         session_start();
-         $email = empty($_SESSION['email']) ? '' : $_SESSION['email'];
-         //$password = empty($_SESSION['password']) ? '' : $_SESSION['password'];
-         $this->user = $this->userDao->findByEmail($email);
-         // ログイン必須でログインしていなかったらログインページに遷移する
-         if ($this->isLogin && empty($this->user)) {
-             header('Location: ./login.php');
-             exit();
-         }
-         $this->smarty->assign('user', $this->user);
-         $this->main();
-         $this->smarty->display($this->template);
-     } catch (\Exception $e) {
-         echo $e->getMessage();
-     }
-     $this->afterMain();
- }
-
- protected function beforeMain()
- {
- }
-
- protected function main()
- {
- }
-
- protected function afterMain()
- {
- }
-}
-
-
-
-
-
-    
+ }  
